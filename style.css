@@ -20,107 +20,118 @@ ul{
     list-style: none;
 }
 
+
 /* Header/Navbar */
 
-.main-header{
-    position: fixed;
-    top: 0;
-    left:0;
-    width: 100%;
-    z-index: 3;
+.navbar{
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
-    text-transform: uppercase;
-    height: 100px;
-    padding: 0 30px;
+    gap:10px;
+    padding: 20px;
+    margin: 0 auto;
+    position: fixed;
+    z-index: 1;
+    /* top: 0; */
 }
 
-/* Logo */
+/* Zasto kada se fiksira ne reaguhe flexbox i velicina kontenjera je ograničena? */
 
-.logo{
-width: 210px;
-height: auto;
+.navbar ul{
+display: flex;
+justify-content:space-around;
+gap: 15px;
+padding-bottom: 2px;
+text-transform: uppercase;
+font-size: 14px;
+font-weight:600;
+
 }
 
-.logo img{
-    display: block;
-    width:100% ;
-    height: auto;
+
+.navimg{
+    display:inline-block;
+    max-width: 210px;
+    max-height: 210px;
+    padding: 10px;
+    margin-left: 30px;
 }
 
-/* Desktop Menu */
-.desktop-main-menu{
-margin-right:50px;
+.navimg a img{
+    width: 100%;
+    height: 100%;
 }
+/* Kada imas link mora da se prebaci u inline-block i da se definise visina */
 
-.desktop-main-menu ul{
-    display: flex;
-    justify-content: space-between;
-    gap:20px;
-}
+/* Underline animation */
 
-.desktop-main-menu ul li{
+.navbar ul li{
     position: relative;
-    padding-bottom: 2px;
 }
 
-/* Menu item bottom border */
-
-.desktop-main-menu ul li a::after {
+.navbar ul li a::after {
     content: '';
+    /* Kad koristim before after mora content */
     position: absolute;
     bottom: 0;
     left: 0;
-    width:100%;
+    width: 100%;
     height: 1px;
-    background:#fff;
-    transform:scaleX(0);
-    transform-origin: left center;
-    transition: transform 0.6s cubic-bezier(0.19,1,0.22,1);
-    
-
-}
-
-.desktop-main-menu ul li a:hover::after{
-    transform: scaleX(1);
+    background-color: #fff;
+    transform: scaleX(0);
     transform-origin: right center;
-    transition-duration: 0.4s;
-    
+    transition: transform 0.6s cubic-bezier(0.19,1,0.22,1);
 }
 
+.navbar ul li a:hover::after{
+    transform: scaleX(1);
+    transform-origin: left center;
+    transition-duration: 0.4s;
+}
+
+
+   
 /* Sections */
 section{
-    position: relative;
-    height: 100vh;
+    height:100vh;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
     text-transform: uppercase;
+    display: flex;
+    align-items: flex-end;
+    
 }
-
 .section-inner{
-    position: absolute;
-    bottom: 200px;
-    left:150px;
-    max-width: 560px;
+    max-width: 500px;
+    margin-bottom: 120px;
+    margin-left: 80px;
 }
-
+/* Drugi način ili jedinica */
 .section-inner h4{
     font-size: 22px;
     margin-bottom: 5px;
     font-weight: 300;
+    animation: fadeinUp 0.5s ease-in-out;
 }
 
 .section-inner h2{
     font-size: 50px;
     font-weight: 600;
     margin-bottom: 20px;
+    animation: fadeinUp 0.5s ease-in-out 0.2s;
+    animation-fill-mode: both; /*Stop from showing at the start */
+}
+
+.section-inner a{
+    animation: fadeinUp 0.5s ease-in-out 0.4s;
+    animation-fill-mode: both;/*Stop from showing at the start */
 }
 
 /* Background image */
 .section-a {
     background-image: url(/img/section-a.webp);
+    
 }
 
 .section-b {
@@ -162,32 +173,202 @@ section{
 }
 
 
-.btn:hover{
+.btn:hover span {
     color: #000;
+}
+
+.btn .hover {
+    position: absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height: 100%;
     background-color: #fff;
+    color:#000;
+    z-index: -1;
+    transform: translateY(100%);
+}
+
+.btn:hover .hover{
+    transform: translateY(0%);
+    transition: transform 0.6s cubic-bezier(0.19,1,0.22,1);
+}
+
+/* Mobile menu */
+
+.mobile-main-menu{
+    position: fixed;
+    top:0;
+    right: 0;
+    width: 350px;
+    height: 100%;
+    background: #000;
+    z-index: 4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: translateX(100%);
+    transition: transform 0.6s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+/* Bring menu from right */
+
+.show-menu{
+    transform: translateX(0);
+}
+
+.mobile-main-menu ul{
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+    justify-content: center;
+    padding: 50px;
+    width: 100%;
+}
+
+.mobile-main-menu ul li{
+    margin-bottom: 20px;
+    font-size: 18px;
+    text-transform: uppercase;
+    border-bottom: 1px #555 dotted;
+    width:100%;
+    text-align: right;
+    padding-bottom: 8px;
+}
+
+.mobile-main-menu ul li a{
+    color:#fff;
+    transition: color 0.6s;
+}
+
+.mobile-main-menu ul li a:hover{
+    color:#aaa;
+}
+
+
+/* Inner Pages */
+.bg-falcon-9{
+    background-image: url('/img/falcon-9.webp');
+}
+
+.bg-falcon-heavy{
+    background-image: url('/img/falcon-heavy.webp');
+}
+
+.bg-dragon{
+    background-image: url('/img/dragon.webp');
+}
+
+.section-animate{
+    animation: fadeIn 2s ease-in-out;
+}
+
+.section-inner-center{
+    position: absolute;
+    top:50%;
+    left:50%;
+    transform: translate(-50%,-50%);
+    text-transform: uppercase;
+    text-align: center;
+    width: 80%;
+}
+
+.section-inner-center h3{
+    font-size: 100px;
+    margin-bottom: 15px;
+    animation:fadeinUp 0.5s ease-in-out;
+}
+
+.section-inner-center p{
+    font-size: 20px;
+    animation:fadeinUp 0.5s ease-in-out 0.2s;
+    animation-fill-mode: both;
+}
+
+
+/* Stats */
+
+.stats{
+    max-width: 960px;
+    margin:0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.stats div span{
+    font-size: 160px;
+}
+
+.stats div h4{
+    font-size: 24px;
+    font-weight: 300;
+}
+
+
+
+/* Animations */
+
+@keyframes fadeinUp{
+    0%{
+        opacity: 0;
+        transform: translateY(140px);
+    }
+
+    100%{
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeIn{
+    0%{
+        opacity: 0;
+        
+    }
+
+    100%{
+        opacity: 1;
+    }
+}
+
+/* Transition hamburger to X when open */
+.open{
+    transform: rotate(90deg);
+}
+
+.open .hamburger-top{
+    transform: rotate(45deg) translateY(6px) translateX(6px);
+}
+.open .hamburger-middle{
+    display: none;
+}
+.open .hamburger-bottom{
+    transform: rotate(-45deg) translateY(6px) translateX(-6px);
 }
 
 
 /* Footer */
 
 footer{
-    position: relative;
     padding: 55px 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+    color:#aaa;
+    text-transform: uppercase;
+    font-size: 13px;    
 }
 
 footer ul{
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    flex-wrap: wrap;
-    gap:30px;
-    
-}
-
-footer ul li{
-color:#aaa;
-text-transform: uppercase;
-font-size: 13px;
+    gap:30px;   
 }
 
 footer ul li a{
@@ -200,6 +381,135 @@ footer ul li a:hover{
 }
 
 
+/* Hmaburger menu */
+
+.hamburger{
+    position: fixed;
+    top:40px;
+    right: 20px;
+    z-index: 10;
+    cursor:pointer;
+    width: 20px;
+    height: 20px;
+    background: none;
+    border:none;
+}
+.hamburger-top,
+.hamburger-middle,
+.hamburger-bottom{
+    position: absolute;
+    width: 20px;
+    height: 2px;
+    top:0;
+    left:0;
+    background:#fff;
+    transition: all 0.5s;
+}
+
+.hamburger-middle {
+    transform: translateY(5px);
+}
+
+.hamburger-bottom {
+    transform: translateY(10px);
+}
 
 
+/* Overlay */
+.overlay-show{
+    position: fixed;
+    top:0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+    z-index: 3;
+}
+
+.stop-scrolling{
+overflow: hidden;
+}
+
+#mobile-only {
+    display: none;
+}
+
+/* Media */
+@media(max-width:768px){
+    
+    .navbar ul{
+        display: none;
+    }
+    .navimg{
+    position: fixed;
+    left: 50%;
+    top: 0;
+    transform: translate(-50%);
+    margin:0;
+    /* ???? */
+    
+    }
+    .section-inner{
+        bottom: 50px;
+        left:20px;
+        max-width: 250px;
+    }
+
+    .section-inner h2{
+        font-size: 38px;
+    }
+
+    footer{
+        flex-direction: column;
+        align-items: center;
+    }
+
+    #mobile-only {
+        display: block;
+    }
+
+    .section-inner-center h3{
+        font-size:75px;
+    }
+}
+
+
+
+@media(max-width:425px){
+    .section-inner h2{
+        font-size: 30px;
+    }
+
+    .section-inner h4{
+        font-size: 18px;
+    }
+    .btn{
+        min-width: 100px;
+        padding: 10px 25px;
+    }
+    
+
+    .section-inner-center h3{
+        font-size:50px;
+    }
+
+    /* Stats */
+
+    .stats {
+        flex-direction: column;
+    }
+
+    .stats div{
+        margin-bottom: 20px;
+    }
+}
+
+
+/* 
+body
+    <seciton> - relative (opciono)
+        <div>...</div> - absolute left 0 top 0
+    </section>
+/body
+*/
 
